@@ -1,0 +1,33 @@
+// Based on:
+// https://github.com/Microsoft/TypeScript-Node-Starter
+//
+// inlineSources:
+// https://blog.jetbrains.com/webstorm/2016/03/how-to-compile-typescript-in-webstorm/
+//
+// experimentalDecorators:
+// https://github.com/pana-cc/mocha-typescript
+
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "target": "es6",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "inlineSources": true,
+    "lib": ["es2016"], // to use array.prototype.include
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "node_modules/*",
+        "src/types/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

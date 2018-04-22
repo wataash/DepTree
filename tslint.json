@@ -1,0 +1,27 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "// // https://github.com/palantir/tslint/issues/924": null,
+        "no-console": [
+            true,
+            "assert",
+            "count",
+            "debug",
+            "dir",
+            "dirxml",
+            "error",
+            "log",
+            "profile",
+            "table",
+            "time",
+            "timeStamp",
+            "trace",
+            "warn"
+        ]
+    },
+    "rulesDirectory": []
+}

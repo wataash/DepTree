@@ -1,0 +1,55 @@
+{
+  "name": "DepTree",
+  "version": "1.0.0",
+  "description": "WIP",
+  "main": "./dist/main.js",
+  "scripts": {
+    "test": "mocha",
+    "coverage": "nyc mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wataash/DepTree.git"
+  },
+  "author": "Wataru Ashihara <wataash0607@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wataash/DepTree/issues"
+  },
+  "homepage": "https://github.com/wataash/DepTree#readme",
+  "devDependencies": {
+    "@types/chai": "^4.1.2",
+    "@types/mocha": "^5.2.0",
+    "@types/node": "^9.6.5",
+    "chai": "^4.1.2",
+    "jsdom": "^11.8.0",
+    "mocha": "^5.1.1",
+    "nyc": "^11.7.1",
+    "ts-node": "^6.0.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.8.3"
+  },
+  "dependencies": {},
+  "nyc": {
+    "include": [
+      "src/*.ts",
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/**/*_test.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text-summary",
+      "html",
+      "json"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  }
+}
