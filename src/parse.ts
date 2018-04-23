@@ -1,9 +1,14 @@
+// TODO
+// tokenize.ts
+// delegate expandPath, check numberOf items
+
 import * as path from "path";
 
-import {askIssue, DepType, IParsed} from "./common";
+import {askIssue, DepType, depTypeDefault, IParsed} from "./common";
 
 // TODO
 // const msg = `${line} : Too many items. (${s.length} items)`;
+// TODO ZParseErrorType
 export enum zParseErrorType {
     success = 0,
     emptyLine,
@@ -49,13 +54,13 @@ export function zParseLine(line: string): [IParsed | null, zParseErrorType] {
         s[1] = zExpandPath(s[0], s[1]);
     }
 
-    let to: { path: string, depType: DepType | null } | null;
+    let to: { path: string, depType: DepType } | null;
     switch (s.length) {
         case 1:
             to = null;
             break;
         case 2:
-            to = {path: s[1], depType: null};
+            to = {path: s[1], depType: depTypeDefault};
             break;
         case 3:
             to = {path: s[1], depType: s[2]};

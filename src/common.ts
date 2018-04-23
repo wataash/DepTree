@@ -19,6 +19,7 @@ export interface IParsed {
 
 // ----------
 
+// TODO
 export enum FileType {
     Directory,
     File,

@@ -30,7 +30,7 @@ rankdir=LR;
 "${TOOLDIR}/" [label="${TOOLDIR}/", shape=folder]
 "${TOOLDIR}/bin/" [label="bin/", shape=folder]
 "${TOOLDIR}/bin/nbconfig" [label="nbconfig"]
-"${TOOLDIR}/bin/nbmake-amd64" [label="nbmake-amd64"]
+"${TOOLDIR}/bin/nbmake-amd64" [label=<nbmake-amd64<BR/><FONT POINT-SIZE="12">wrapper for nbmake</FONT>>]
 "${TOOLDIR}/bin/nbmake" [label="nbmake"]
 "src/" [label="src/", shape=folder]
 "src/share/" [label="share/", shape=folder]
@@ -76,17 +76,17 @@ rankdir=LR;
 "src/" -> "src/tools/" [arrowhead=none];
 "src/tools/" -> "src/tools/Makefile" [arrowhead=none];
 
-"${TOOLDIR}/bin/nbmake-amd64" -> "${TOOLDIR}/bin/nbmake" [constraint=false, color="#365a93"];
-"${TOOLDIR}/bin/nbmake-amd64" -> "src/share/mk" [constraint=false, color=""];
-"src/build.sh" -> "${OBJDIR}/sys/arch/amd64/compile/GENERIC/Makefile" [constraint=false, color=""];
-"src/build.sh" -> "src/share/mk" [constraint=false, color=""];
-"src/build.sh" -> "src/sys/arch/amd64/compile/Makefile" [constraint=false, color=""];
-"src/build.sh" -> "src/sys/arch/amd64/conf/GENERIC" [constraint=false, color=""];
-"src/build.sh" -> "src/tools/Makefile" [constraint=false, color="#365a93"];
+"${TOOLDIR}/bin/nbmake-amd64" -> "${TOOLDIR}/bin/nbmake" [constraint=false, color="#365a93", label=""];
+"${TOOLDIR}/bin/nbmake-amd64" -> "src/share/mk" [constraint=false, color="#999999", label=<<FONT POINT-SIZE="12">MAKEFLAGS</FONT>>];
+"src/build.sh" -> "${OBJDIR}/sys/arch/amd64/compile/GENERIC/Makefile" [constraint=false, color="#999999", label=<<FONT POINT-SIZE="12">nmbake-amd64 depend all</FONT>>];
+"src/build.sh" -> "src/share/mk" [constraint=false, color="#999999", label=<<FONT POINT-SIZE="12">nbmake -m src/share/mk</FONT>>];
+"src/build.sh" -> "src/sys/arch/amd64/compile/Makefile" [constraint=false, color="#999999", label=<<FONT POINT-SIZE="12">nbmake-amd64 obj</FONT>>];
+"src/build.sh" -> "src/sys/arch/amd64/conf/GENERIC" [constraint=false, color="#999999", label=<<FONT POINT-SIZE="12">nbconfig -b ${OBJDIR} -s src/netbsd/src/sys/</FONT>>];
+"src/build.sh" -> "src/tools/Makefile" [constraint=false, color="#365a93", label=<<FONT POINT-SIZE="12">nbmake</FONT>>];
 }
 ```
 
-![tes dot](https://user-images.githubusercontent.com/4846670/39097633-03209e46-469a-11e8-8785-d37f019b8c82.png)
+![tes dot](https://user-images.githubusercontent.com/4846670/39125086-d0b4f584-4738-11e8-958f-9617617539e7.png)
 
 
 <!--
@@ -97,4 +97,9 @@ watch on linux:
 ```fish
 while true; clear; clear; npm run coverage; inotifywait -e create -r src/; end
 ```
+
+on mac:
+
+while true; npm run coverage; fswatch -o src/; end
+
 -->

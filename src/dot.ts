@@ -6,12 +6,25 @@ import {DepTreeError, FileType, IDefinition, INode} from "./common";
  */
 export function zNodesToDotsNode(node: INode): string {
     // TODO: if path contains "
+
+    let label = libPath.basename(node.path);
+
     if (node.type === FileType.Directory) {
-        return `"${node.path}" [label="${libPath.basename(node.path)}/", shape=folder]`;
-    } else if (node.type === FileType.File) {
-        return `"${node.path}" [label="${libPath.basename(node.path)}"]`;
+        label += "/";
+    }
+
+    // if (node.annot !== null) { // TODO
+    if (node.annot === undefined || node.annot === null) { // TODO bug: undefined
+        label = `"${label}"`;
     } else {
-        throw new DepTreeError(`${JSON.stringify(node)}: unknown type.`);
+        // TODO escape < >
+        label = `<${label}<BR/><FONT POINT-SIZE="12">${node.annot}</FONT>>`;
+    }
+
+    if (node.type === FileType.Directory) {
+        return `"${node.path}" [label=${label}, shape=folder]`;
+    } else if (node.type === FileType.File) {
+        return `"${node.path}" [label=${label}]`;
     }
 }
 
@@ -22,7 +35,11 @@ export function zNodesToDotsDep(node: INode, defs: IDefinition[]): string[] {
     const dotDeps: string[] = [];
 
     for (const dep of node.deps) {
-        const todo = dep.annot; // TODO
+        let label = '""';
+        if (dep.annot !== null) {
+            label = `<<FONT POINT-SIZE="12">${dep.annot}</FONT>>`;
+        }
+
         let color = "";
         for (const def of defs) {
             // TODO map; O(n) -> O(1)
@@ -31,7 +48,7 @@ export function zNodesToDotsDep(node: INode, defs: IDefinition[]): string[] {
                 color = def.color;
             }
         }
-        dotDeps.push(`"${node.path}" -> "${dep.to.path}" [constraint=false, color="${color}"];`);
+        dotDeps.push(`"${node.path}" -> "${dep.to.path}" [constraint=false, color="${color}", label=${label}];`);
     }
 
     return dotDeps;

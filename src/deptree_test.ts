@@ -13,7 +13,7 @@ const definitions: IDefinition[] = [
 
 // TODO test start with /
 
-const txt = `
+const txt0 = `
 # ./build.sh -n -m amd64 -T ../tools u -U kernel=GENERIC
 \${TOOLDIR}/bin/nbconfig
 \${TOOLDIR}/bin/nbmake-amd64 \${TOOLDIR}/bin/nbmake x
@@ -26,12 +26,17 @@ src/build.sh src/sys/arch/amd64/conf/GENERIC ; nbconfig -b \${OBJDIR} -s src/net
 src/build.sh src/tools/Makefile x ; nbmake
 `;
 
-const dot = `
+const dot0 = `
 `;
 
 describe("deptree.ts txtToDot()", () => {
     it("should foo", () => {
+        const txt = `
+            src/dir/file1 ; annot1
+            src/dir/file2 ./file3 x
+            src/dir/file2 ../file4 ; annot4
+        `;
         // TODO here, easier test case
-        // expect(txtToDot(definitions, txt)).to.equal("dot");
+        expect(txtToDot(definitions, txt0)).to.equal("dot");
     });
 });
